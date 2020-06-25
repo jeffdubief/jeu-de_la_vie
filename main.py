@@ -1,4 +1,5 @@
 from tkinter import *
+import random
 
 
 def damier():  # fonction dessinant le tableau
@@ -32,6 +33,15 @@ def click_droit(event):  # fonction tuant la cellule cliquée donc met la valeur
     y = event.y - (event.y % c)
     can1.create_rectangle(x, y, x + c, y + c, fill='white')
     dico_case[x, y] = 0
+
+
+def miracle(): #fonction créant une cellule aléatoirement
+    a = random.randint(0, width)
+    b = random.randint(0, height)
+    x = a - (a % c)
+    y = b - (b % c)
+    can1.create_rectangle(x, y, x + c, y + c, fill='black')
+    dico_case[x, y] = 1
 
 
 def go():
@@ -182,6 +192,12 @@ def play():  # fonction comptant le nombre de cellules vivantes autour de chaque
         v += 1
     cycles = cycles - 1
     redessiner()
+
+    i = random.randint(0, 10)
+    while i > 0:
+        miracle()
+        i = i - 1
+
     if flag > 0 and cycles > 0:
         fen1.after(vitesse, play)
     else:
